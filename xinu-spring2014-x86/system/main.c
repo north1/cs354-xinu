@@ -31,7 +31,9 @@ int main(int argc, char **argv)
 
 	//while (1);
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
-
+	
+	//kprintf("%x : %x", 8, host2netl_asm(8));
+	
 	/* Wait for shell to exit and recreate it */
 	recvclr();
 	while (TRUE) {
