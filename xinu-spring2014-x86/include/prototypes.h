@@ -464,6 +464,12 @@ extern	void	xdone(void);
 /* in file yield.c */
 extern	syscall	yield(void);
 
+/* in file printsegaddress.c */
+extern void printsegaddress(void);
+
+/* in file myprogA.c */
+extern int32 myfuncA(int32, int32);
+
 /* NETWORK BYTE ORDER CONVERSION NOT NEEDED ON A BIG-ENDIAN COMPUTER */
 #define	htons(x)   ( ( 0xff & ((x)>>8) ) | ( (0xff & (x)) << 8 ) )
 #define	htonl(x)   (  (((x)>>24) & 0x000000ff) | (((x)>> 8) & 0x0000ff00) | \

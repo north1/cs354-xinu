@@ -3,6 +3,9 @@
 #include <xinu.h>
 #include <stdio.h>
 
+static unsigned long *esp;
+
+
 int main(int argc, char **argv)
 {
 	uint32 retval;
@@ -30,10 +33,27 @@ int main(int argc, char **argv)
 
 
 	//while (1);
+	sleep(1);
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
-	
+	sleep(1);
 	//kprintf("%x : %x", 8, host2netl_asm(8));
 	printsegaddress();
+
+	kprintf("\n\n\n\r");
+	kprintf("Activity3: \n");
+	unsigned long *sp;
+	asm("movl %esp,esp");
+	sp = esp;
+	kprintf("Top of runtime stack before myprogA is created: 		%08X\n\r",
+		sp);	
+	kprintf("Contents of top of runtime stack before myprogA is created: 	%08X\n\r",
+		*sp);
+	//kprintf("stack trace for comparison:\n\r");
+	//stacktrace(getpid());
+	sleep(1);
+	myprogA();
+	sleep(1);
+	kprintf("----- end activity3 ----\n\n\r");
 
 	/* Wait for shell to exit and recreate it */
 	recvclr();
