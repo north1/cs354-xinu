@@ -1,5 +1,7 @@
 #include <xinu.h>
 
+void takeUpSpace(char);
+
 void someprogA() {
 	putc(CONSOLE, 'A');
 
@@ -26,4 +28,24 @@ void someprogB() {
 	somefuncA('b');
 	
 	putc(CONSOLE, 'B');
+}
+
+void rogueB() {
+	//print something and give up control
+	putc(CONSOLE, 'B');
+	sleepms(20);
+
+	//try to fill up the stack
+	takeUpSpace((char)0);
+
+	//give up control again
+	sleepms(20);
+}
+
+void takeUpSpace(char foo) {
+	char bar = foo++;
+	if (foo < 256) {
+		takeUpSpace(bar);
+	}
+	else { return; }	
 }

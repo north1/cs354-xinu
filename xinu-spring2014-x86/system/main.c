@@ -70,7 +70,8 @@ int main(int argc, char **argv)
 	//4
 	kprintf("\n\n\nLab 1 - Assignment 4\n");
 	sleep(1);
-	resume(create(someprogB, 1024, 20, "someprogB", 0));
+	//note here that I shrink the stack for rogueB to make the overflow easier
+	resume(create(rogueB, 256, 20, "someprogB", 0));
 	resume(create(someprogA, 1024, 20, "someprogA", 0));
 	sleep(1);
 
