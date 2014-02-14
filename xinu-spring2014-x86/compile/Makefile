@@ -71,6 +71,7 @@ SYSTEM_CFILES =								\
 	unsleep.c	userret.c	wait.c		wakeup.c	\
 	write.c		xdone.c		yield.c		evec.c 		\
 	stacktrace.c	printsegaddress.c		myprogA.c	\
+	printprocstks.c	someprogA.c					\
 
 SYSTEM_SFULL = ${SYSTEM_SFILES:%=../system/%}
 SYSTEM_CFULL = ${SYSTEM_CFILES:%=../system/%}

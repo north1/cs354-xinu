@@ -31,16 +31,22 @@ int main(int argc, char **argv)
 	}
 	*/
 
-
+	//shell stuff
 	//while (1);
 	sleep(1);
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 	sleep(1);
-	//kprintf("%x : %x", 8, host2netl_asm(8));
+
+	//3.1
+	kprintf("\n\n\nLab 1 - Assignment 3.1\n");
+	kprintf("%x : %x", 8, host2netl_asm(8));
+	
+	//3.2
+	kprintf("\n\n\nLab 1 - Assignment 3.2\n");
 	printsegaddress();
 
-	kprintf("\n\n\n\r");
-	kprintf("Activity3: \n");
+	//3.3
+	kprintf("\n\n\nLab 1 - Assignment 3.3\n");
 	unsigned long *sp;
 	asm("movl %esp,esp");
 	sp = esp;
@@ -53,7 +59,20 @@ int main(int argc, char **argv)
 	sleep(1);
 	myprogA();
 	sleep(1);
-	kprintf("----- end activity3 ----\n\n\r");
+
+	//3.4
+	kprintf("\n\n\nLab 1 - Assignment 3.4\n");
+	sleep(1);
+	printprocstks();
+	sleep(1);
+
+
+	//4
+	kprintf("\n\n\nLab 1 - Assignment 4\n");
+	sleep(1);
+	resume(create(someprogB, 1024, 20, "someprogB", 0));
+	resume(create(someprogA, 1024, 20, "someprogA", 0));
+	sleep(1);
 
 	/* Wait for shell to exit and recreate it */
 	recvclr();

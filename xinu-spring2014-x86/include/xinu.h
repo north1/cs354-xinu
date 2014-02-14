@@ -29,3 +29,4 @@
 #include <i386.h>
 #include <pci.h>
 #include <e1000e.h>
+#include <lab1.h>
