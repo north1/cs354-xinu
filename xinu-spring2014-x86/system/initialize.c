@@ -93,7 +93,7 @@ void	nulluser(void)
 	/*  something to run when no other process is ready to execute)	*/
 
 	while (TRUE) {
-		;		/* do nothing */
+		kputc('N');	/* do nothing */
 	}
 }
 

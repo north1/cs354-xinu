@@ -30,3 +30,4 @@
 #include <pci.h>
 #include <e1000e.h>
 #include <lab1.h>
+#include <lab2.h>
