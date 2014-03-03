@@ -37,6 +37,19 @@ int main(int argc, char **argv)
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 	sleep(1);
 
+	pid32 procA = create(printloop, 256, 10, "printloop A", 1, 'A');	
+	pid32 procB = create(printloop, 256, 10, "printloop B", 1, 'B');	
+	pid32 procC = create(printloop, 256, 10, "printloop C", 1, 'C');
+
+	kputc('P');
+	resume(procA);
+	kputc('P');
+	resume(procB);
+	kputc('P');
+	resume(procC);
+
+	sleepms(5000);
+
 
 	/* Wait for shell to exit and recreate it */
 	recvclr();

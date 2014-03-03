@@ -22,6 +22,11 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
+
+	/* Reprioritize process based on time-share table - lab 3 */
+	//TODO
+
+
 	if (ptold->prstate == PR_CURR) {  /* process remains running */
 		if (ptold->prprio > firstkey(readylist)) {
 			return;

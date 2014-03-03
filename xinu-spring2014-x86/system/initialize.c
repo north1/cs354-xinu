@@ -30,6 +30,9 @@ pid32	currpid;		/* ID of currently executing process	*/
 void	*minheap;		/* start of heap			*/
 void	*maxheap;		/* highest valid memory address		*/
 
+/* Table for proccess scheduling in lab 3 */
+struct ts_ent tstab[TSTAB_SIZE];
+
 /*------------------------------------------------------------------------
  * nulluser - initialize the system and become the null process
  *
@@ -93,7 +96,7 @@ void	nulluser(void)
 	/*  something to run when no other process is ready to execute)	*/
 
 	while (TRUE) {
-		kputc('N');	/* do nothing */
+	/* do nothing */
 	}
 }
 
@@ -111,6 +114,191 @@ static	void	sysinit(void)
 	struct	dentry	*devptr;	/* ptr to device table entry	*/
 	struct	sentry	*semptr;	/* prr to semaphore table entry	*/
 	struct	memblk	*memptr;	/* ptr to memory block		*/
+
+
+	/* Initialize the time-share process table for lab 3 */
+	tstab[0].ts_quantum = 200;
+	tstab[0].ts_tqexp = 0;
+	tstab[0].ts_slpret = 50;
+	tstab[1].ts_quantum = 200;
+	tstab[1].ts_tqexp = 0;
+	tstab[1].ts_slpret = 50;
+	tstab[2].ts_quantum = 200;
+	tstab[2].ts_tqexp = 0;
+	tstab[2].ts_slpret = 50;
+	tstab[3].ts_quantum = 200;
+	tstab[3].ts_tqexp = 0;
+	tstab[3].ts_slpret = 50;
+	tstab[4].ts_quantum = 200;
+	tstab[4].ts_tqexp = 0;
+	tstab[4].ts_slpret = 50;
+	tstab[5].ts_quantum = 200;
+	tstab[5].ts_tqexp = 0;
+	tstab[5].ts_slpret = 50;
+	tstab[6].ts_quantum = 200;
+	tstab[6].ts_tqexp = 0;
+	tstab[6].ts_slpret = 50;
+	tstab[7].ts_quantum = 200;
+	tstab[7].ts_tqexp = 0;
+	tstab[7].ts_slpret = 50;
+	tstab[8].ts_quantum = 200;
+	tstab[8].ts_tqexp = 0;
+	tstab[8].ts_slpret = 50;
+	tstab[9].ts_quantum = 200;
+	tstab[9].ts_tqexp = 0;
+	tstab[9].ts_slpret = 50;
+	tstab[10].ts_quantum = 160;
+	tstab[10].ts_tqexp = 0;
+	tstab[10].ts_slpret = 51;
+	tstab[11].ts_quantum = 160;
+	tstab[11].ts_tqexp = 1;
+	tstab[11].ts_slpret = 51;
+	tstab[12].ts_quantum = 160;
+	tstab[12].ts_tqexp = 2;
+	tstab[12].ts_slpret = 51;
+	tstab[13].ts_quantum = 160;
+	tstab[13].ts_tqexp = 3;
+	tstab[13].ts_slpret = 51;
+	tstab[14].ts_quantum = 160;
+	tstab[14].ts_tqexp = 4;
+	tstab[14].ts_slpret = 51;
+	tstab[15].ts_quantum = 160;
+	tstab[15].ts_tqexp = 5;
+	tstab[15].ts_slpret = 51;
+	tstab[16].ts_quantum = 160;
+	tstab[16].ts_tqexp = 6;
+	tstab[16].ts_slpret = 51;
+	tstab[17].ts_quantum = 160;
+	tstab[17].ts_tqexp = 7;
+	tstab[17].ts_slpret = 51;
+	tstab[18].ts_quantum = 160;
+	tstab[18].ts_tqexp = 8;
+	tstab[18].ts_slpret = 51;
+	tstab[19].ts_quantum = 160;
+	tstab[19].ts_tqexp = 9;
+	tstab[19].ts_slpret = 51;
+	tstab[20].ts_quantum = 120;
+	tstab[20].ts_tqexp = 10;
+	tstab[20].ts_slpret = 52;
+	tstab[21].ts_quantum = 120;
+	tstab[21].ts_tqexp = 11;
+	tstab[21].ts_slpret = 52;
+	tstab[22].ts_quantum = 120;
+	tstab[22].ts_tqexp = 12;
+	tstab[22].ts_slpret = 52;
+	tstab[23].ts_quantum = 120;
+	tstab[23].ts_tqexp = 13;
+	tstab[23].ts_slpret = 52;
+	tstab[24].ts_quantum = 120;
+	tstab[24].ts_tqexp = 14;
+	tstab[24].ts_slpret = 52;
+	tstab[25].ts_quantum = 120;
+	tstab[25].ts_tqexp = 15;
+	tstab[25].ts_slpret = 52;
+	tstab[26].ts_quantum = 120;
+	tstab[26].ts_tqexp = 16;
+	tstab[26].ts_slpret = 52;
+	tstab[27].ts_quantum = 120;
+	tstab[27].ts_tqexp = 17;
+	tstab[27].ts_slpret = 52;
+	tstab[28].ts_quantum = 120;
+	tstab[28].ts_tqexp = 18;
+	tstab[28].ts_slpret = 52;
+	tstab[29].ts_quantum = 120;
+	tstab[29].ts_tqexp = 19;
+	tstab[29].ts_slpret = 52;
+	tstab[30].ts_quantum = 80;
+	tstab[30].ts_tqexp = 20;
+	tstab[30].ts_slpret = 53;
+	tstab[31].ts_quantum = 80;
+	tstab[31].ts_tqexp = 21;
+	tstab[31].ts_slpret = 53;
+	tstab[32].ts_quantum = 80;
+	tstab[32].ts_tqexp = 22;
+	tstab[32].ts_slpret = 53;
+	tstab[33].ts_quantum = 80;
+	tstab[33].ts_tqexp = 23;
+	tstab[33].ts_slpret = 53;
+	tstab[34].ts_quantum = 80;
+	tstab[34].ts_tqexp = 24;
+	tstab[34].ts_slpret = 53;
+	tstab[35].ts_quantum = 80;
+	tstab[35].ts_tqexp = 25;
+	tstab[35].ts_slpret = 54;
+	tstab[36].ts_quantum = 80;
+	tstab[36].ts_tqexp = 26;
+	tstab[36].ts_slpret = 54;
+	tstab[37].ts_quantum = 80;
+	tstab[37].ts_tqexp = 27;
+	tstab[37].ts_slpret = 54;
+	tstab[38].ts_quantum = 80;
+	tstab[38].ts_tqexp = 28;
+	tstab[38].ts_slpret = 54;
+	tstab[39].ts_quantum = 80;
+	tstab[39].ts_tqexp = 29;
+	tstab[39].ts_slpret = 54;
+	tstab[40].ts_quantum = 40;
+	tstab[40].ts_tqexp = 30;
+	tstab[40].ts_slpret = 55;
+	tstab[41].ts_quantum = 40;
+	tstab[41].ts_tqexp = 31;
+	tstab[41].ts_slpret = 55;
+	tstab[42].ts_quantum = 40;
+	tstab[42].ts_tqexp = 32;
+	tstab[42].ts_slpret = 55;
+	tstab[43].ts_quantum = 40;
+	tstab[43].ts_tqexp = 33;
+	tstab[43].ts_slpret = 55;
+	tstab[44].ts_quantum = 40;
+	tstab[44].ts_tqexp = 34;
+	tstab[44].ts_slpret = 55;
+	tstab[45].ts_quantum = 40;
+	tstab[45].ts_tqexp = 35;
+	tstab[45].ts_slpret = 56;
+	tstab[46].ts_quantum = 40;
+	tstab[46].ts_tqexp = 36;
+	tstab[46].ts_slpret = 57;
+	tstab[47].ts_quantum = 40;
+	tstab[47].ts_tqexp = 37;
+	tstab[47].ts_slpret = 58;
+	tstab[48].ts_quantum = 40;
+	tstab[48].ts_tqexp = 38;
+	tstab[48].ts_slpret = 58;
+	tstab[49].ts_quantum = 40;
+	tstab[49].ts_tqexp = 39;
+	tstab[49].ts_slpret = 58;
+	tstab[50].ts_quantum = 40;
+	tstab[50].ts_tqexp = 40;
+	tstab[50].ts_slpret = 58;
+	tstab[51].ts_quantum = 40;
+	tstab[51].ts_tqexp = 41;
+	tstab[51].ts_slpret = 58;
+	tstab[52].ts_quantum = 40;
+	tstab[52].ts_tqexp = 42;
+	tstab[52].ts_slpret = 58;
+	tstab[53].ts_quantum = 40;
+	tstab[53].ts_tqexp = 43;
+	tstab[53].ts_slpret = 58;
+	tstab[54].ts_quantum = 40;
+	tstab[54].ts_tqexp = 44;
+	tstab[54].ts_slpret = 58;
+	tstab[55].ts_quantum = 40;
+	tstab[55].ts_tqexp = 45;
+	tstab[55].ts_slpret = 58;
+	tstab[56].ts_quantum = 40;
+	tstab[56].ts_tqexp = 46;
+	tstab[56].ts_slpret = 58;
+	tstab[57].ts_quantum = 40;
+	tstab[57].ts_tqexp = 47;
+	tstab[57].ts_slpret = 58;
+	tstab[58].ts_quantum = 40;
+	tstab[58].ts_tqexp = 48;
+	tstab[58].ts_slpret = 58;
+	tstab[59].ts_quantum = 20;
+	tstab[59].ts_tqexp = 49;
+	tstab[59].ts_slpret = 59;
+	
+
 
 	/* Initialize the interrupt vectors */
 
