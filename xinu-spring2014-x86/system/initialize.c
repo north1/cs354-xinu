@@ -33,6 +33,9 @@ void	*maxheap;		/* highest valid memory address		*/
 /* Table for proccess scheduling in lab 3 */
 struct ts_ent tstab[TSTAB_SIZE];
 
+/* Table for MLFQ in lab 3 */
+qid16 readylist[TSTAB_SIZE];
+
 /*------------------------------------------------------------------------
  * nulluser - initialize the system and become the null process
  *
@@ -372,9 +375,12 @@ static	void	sysinit(void)
 	/* Initialize buffer pools */
 
 	bufinit();
+
 	/* Create a ready list for processes */
 
-	readylist = newqueue();
+	for (i = 0; i < TSTAB_SIZE; i++) {
+		readylist[i] = newqueue();
+	}
 
 	/* Initialize the PCI bus */
 

@@ -10,3 +10,9 @@ struct ts_ent {
 };
 
 extern struct ts_ent tstab[];
+
+/* MLFQ function prototypes */
+int32 firstready(qid16[]);
+pid32 demlfq(qid16[]);
+
+

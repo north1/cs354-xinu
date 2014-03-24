@@ -8,12 +8,14 @@
  */
 void	resched(void)		/* assumes interrupts are disabled	*/
 {
+	kprintf("entered resched\n");
 	struct procent *ptold;	/* ptr to table entry for old process	*/
 	struct procent *ptnew;	/* ptr to table entry for new process	*/
 
 	/* If rescheduling is deferred, record attempt and return */
 
 	if (Defer.ndefers > 0) {
+		kprintf("Defer.ndefers: %d\n", Defer.ndefers);
 		Defer.attempt = TRUE;
 		return;
 	}
@@ -22,28 +24,36 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 
 	ptold = &proctab[currpid];
 
-
-	/* Reprioritize process based on time-share table - lab 3 */
-	//TODO
-
-
 	if (ptold->prstate == PR_CURR) {  /* process remains running */
-		if (ptold->prprio > firstkey(readylist)) {
+		kprintf("a\n");
+		sleep(5);
+		/* Reprioritize process based on time-share table - lab 3 */
+		ptold->prprio = tstab[ptold->prprio].ts_tqexp;
+		
+		if (ptold->prprio > firstready(readylist)) {
 			return;
 		}
 
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-		insert(currpid, readylist, ptold->prprio);
+		//insert(currpid, readylist, ptold->prprio); old version before lab 3
+		enqueue(currpid, readylist[ptold->prprio]);
+	}
+	else if (ptold->prstate == PR_SLEEP) { /* process voluntarily gave up CPU */
+		kprintf("b\n");
+		sleep(5);
+		/* Reprioritize process based on time-share table - lab 3 */
+		ptold->prprio = tstab[ptold->prprio].ts_slpret;
 	}
 
 	/* Force context switch to highest priority ready process */
 
-	currpid = dequeue(readylist);
+	currpid = demlfq(readylist);
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
-	preempt = QUANTUM;		/* reset time slice for process	*/
+	/* reset time slice for process -- previously set to QUANTUM, changed for lab3	*/
+	preempt = tstab[ptnew->prprio].ts_quantum;
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */

@@ -37,6 +37,8 @@ int main(int argc, char **argv)
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
 	sleep(1);
 
+	//kprintf("proctab[0].tqexp: %d", tstab[0].ts_tqexp);
+
 
 	/* Wait for shell to exit and recreate it */
 	recvclr();
