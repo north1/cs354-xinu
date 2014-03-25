@@ -25,7 +25,9 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 	if (ptold->prstate == PR_CURR) {  /* process remains running */
 		//kprintf("a\n");
 		/* Reprioritize process based on time-share table - lab 3 */
-		ptold->prprio = tstab[ptold->prprio].ts_tqexp;
+		int32 newprio = tstab[ptold->prprio].ts_tqexp + 1;
+		if (newprio > 59) {newprio = 59;}
+		ptold->prprio = newprio;
 		
 		if (ptold->prprio > firstready(readylist)) {
 			return;
@@ -40,7 +42,9 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 	else if (ptold->prstate == PR_SLEEP) { /* process voluntarily gave up CPU */
 		//kprintf("b\n");
 		/* Reprioritize process based on time-share table - lab 3 */
-		ptold->prprio = tstab[ptold->prprio].ts_slpret;
+		int32 newprio = tstab[ptold->prprio].ts_slpret + 1;
+		if (newprio > 59) {newprio = 59;}
+		ptold->prprio = newprio;
 	}
 
 	/* Force context switch to highest priority ready process */

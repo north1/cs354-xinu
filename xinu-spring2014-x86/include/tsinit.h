@@ -15,4 +15,7 @@ extern struct ts_ent tstab[];
 int32 firstready(qid16[]);
 pid32 demlfq(qid16[]);
 
+/* testing prototypes */
+extern void cpuintensive();
+
 
