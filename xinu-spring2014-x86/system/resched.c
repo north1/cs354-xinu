@@ -8,14 +8,12 @@
  */
 void	resched(void)		/* assumes interrupts are disabled	*/
 {
-	kprintf("entered resched\n");
 	struct procent *ptold;	/* ptr to table entry for old process	*/
 	struct procent *ptnew;	/* ptr to table entry for new process	*/
 
 	/* If rescheduling is deferred, record attempt and return */
 
 	if (Defer.ndefers > 0) {
-		kprintf("Defer.ndefers: %d\n", Defer.ndefers);
 		Defer.attempt = TRUE;
 		return;
 	}
@@ -25,8 +23,7 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 	ptold = &proctab[currpid];
 
 	if (ptold->prstate == PR_CURR) {  /* process remains running */
-		kprintf("a\n");
-		sleep(5);
+		//kprintf("a\n");
 		/* Reprioritize process based on time-share table - lab 3 */
 		ptold->prprio = tstab[ptold->prprio].ts_tqexp;
 		
@@ -41,8 +38,7 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 		enqueue(currpid, readylist[ptold->prprio]);
 	}
 	else if (ptold->prstate == PR_SLEEP) { /* process voluntarily gave up CPU */
-		kprintf("b\n");
-		sleep(5);
+		//kprintf("b\n");
 		/* Reprioritize process based on time-share table - lab 3 */
 		ptold->prprio = tstab[ptold->prprio].ts_slpret;
 	}
