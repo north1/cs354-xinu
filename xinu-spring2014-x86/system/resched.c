@@ -23,11 +23,12 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 	ptold = &proctab[currpid];
 
 
-	/* Reprioritize process based on time-share table - lab 3 */
-	//TODO
 
 
 	if (ptold->prstate == PR_CURR) {  /* process remains running */
+		/* Reprioritize process based on time-share table - lab 3 */
+		ptold->prprio = tstab[ptold->prprio].ts_tqexp;
+
 		if (ptold->prprio > firstkey(readylist)) {
 			return;
 		}
@@ -37,13 +38,17 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 		ptold->prstate = PR_READY;
 		insert(currpid, readylist, ptold->prprio);
 	}
+	else { /* process voluntarily gave up CPU */
+		ptold->prprio = tstab[ptold->prprio].ts_slpret;
+	}
 
 	/* Force context switch to highest priority ready process */
 
 	currpid = dequeue(readylist);
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
-	preempt = QUANTUM;		/* reset time slice for process	*/
+	/* reset time slice for process	-- previously set to QUANTUM, changed for lab 3 */
+	preempt = tstab[ptnew->prprio].ts_quantum;
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */
