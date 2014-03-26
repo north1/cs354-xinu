@@ -23,8 +23,7 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 	ptold = &proctab[currpid];
 
 	if (ptold->prstate == PR_CURR) {  /* process remains running */
-		//kprintf("a\n");
-		/* Reprioritize process based on time-share table - lab 3 */
+		/* LAB 3 -- Reprioritize process based on time-share table */
 		int32 newprio = tstab[ptold->prprio].ts_tqexp + 1;
 		if (newprio > 59) {newprio = 59;}
 		ptold->prprio = newprio;
@@ -36,12 +35,11 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 		/* Old process will no longer remain current */
 
 		ptold->prstate = PR_READY;
-		//insert(currpid, readylist, ptold->prprio); old version before lab 3
+		/* LAB 3 - Changed insert to enqueue for mlfq */
 		enqueue(currpid, readylist[ptold->prprio]);
 	}
 	else if (ptold->prstate == PR_SLEEP) { /* process voluntarily gave up CPU */
-		//kprintf("b\n");
-		/* Reprioritize process based on time-share table - lab 3 */
+		/* LAB 3 -- Reprioritize process based on time-share table */
 		int32 newprio = tstab[ptold->prprio].ts_slpret + 1;
 		if (newprio > 59) {newprio = 59;}
 		ptold->prprio = newprio;
@@ -49,11 +47,15 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 
 	/* Force context switch to highest priority ready process */
 
+	/* LAB 3 -- Changed dequeue to demlfq to handle readylist */
 	currpid = demlfq(readylist);
+	
 	ptnew = &proctab[currpid];
 	ptnew->prstate = PR_CURR;
-	/* reset time slice for process -- previously set to QUANTUM, changed for lab3	*/
+	
+	/* LAB 3 -- reset time slice for process -- previously set to QUANTUM */
 	preempt = tstab[ptnew->prprio].ts_quantum;
+	
 	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
 
 	/* Old process returns here when resumed */

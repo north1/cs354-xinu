@@ -72,7 +72,7 @@ SYSTEM_CFILES =								\
 	write.c		xdone.c		yield.c		evec.c 		\
 	stacktrace.c	printsegaddress.c		myprogA.c	\
 	printprocstks.c	someprogA.c	printloop.c	mlfq.c		\
-	cpuintensive.c							\
+	cpuintensive.c	iointensive.c					\
 
 SYSTEM_SFULL = ${SYSTEM_SFILES:%=../system/%}
 SYSTEM_CFULL = ${SYSTEM_CFILES:%=../system/%}

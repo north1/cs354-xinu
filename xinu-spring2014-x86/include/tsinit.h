@@ -17,5 +17,5 @@ pid32 demlfq(qid16[]);
 
 /* testing prototypes */
 extern void cpuintensive();
-
+extern void iointensive();
 

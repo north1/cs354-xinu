@@ -77,10 +77,17 @@ extern	void	_doprnt(char *, va_list, int (*)(int), int);
  */
 syscall kprintf(char *fmt, ...)
 {
+
+	int mask;
+	mask = disable();
+
     va_list ap;
 
     va_start(ap, fmt);
     _doprnt(fmt, ap, (int (*)(int))kputc, (int)&devtab[CONSOLE]);
     va_end(ap);
+
+	restore(mask);
+
     return OK;
 }
