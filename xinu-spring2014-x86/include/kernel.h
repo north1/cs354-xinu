@@ -56,6 +56,7 @@ typedef	int32	status;		/* returned status value (OK/SYSERR)	*/
 #define	EOF	(-2)		/* End-of-file (usually from read)	*/
 #define	TIMEOUT	(-3)		/* system call timed out		*/
 
+/* LAB 3 -- changed readylist to an array */
 extern	qid16	readylist[];	/* global ID for list of ready processes*/
 
 #define	MINSTK	400		/* minimum stack size in bytes		*/

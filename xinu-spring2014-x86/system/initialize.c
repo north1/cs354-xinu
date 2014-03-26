@@ -30,10 +30,10 @@ pid32	currpid;		/* ID of currently executing process	*/
 void	*minheap;		/* start of heap			*/
 void	*maxheap;		/* highest valid memory address		*/
 
-/* Table for proccess scheduling in lab 3 */
+/* LAB 3 -- Table for proccess scheduling*/
 struct ts_ent tstab[TSTAB_SIZE];
 
-/* Table for MLFQ in lab 3 */
+/* LAB 3 -- Table for MLFQ */
 qid16 readylist[TSTAB_SIZE];
 
 /*------------------------------------------------------------------------
@@ -119,7 +119,12 @@ static	void	sysinit(void)
 	struct	memblk	*memptr;	/* ptr to memory block		*/
 
 
-	/* Initialize the time-share process table for lab 3 */
+	/* LAB 3 -- Initialize the time-share process table */
+	/* 
+	 * I'm not proud of this. There was, for certain, a better
+	 * way to do this. But it worked and I didn't have to
+	 * think abotu it 
+	 * */
 	tstab[0].ts_quantum = 200;
 	tstab[0].ts_tqexp = 0;
 	tstab[0].ts_slpret = 50;
@@ -377,7 +382,7 @@ static	void	sysinit(void)
 	bufinit();
 
 	/* Create a ready list for processes */
-
+	/* LAB 3 -- Made this a loop of 60 calls to nequeue */
 	for (i = 0; i < TSTAB_SIZE; i++) {
 		readylist[i] = newqueue();
 	}

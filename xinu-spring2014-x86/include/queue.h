@@ -5,6 +5,7 @@
 /* Default # of queue entries: 1 per process plus 2 for ready list plus	*/
 /*			2 for sleep list plus 2 per semaphore		*/
 #ifndef NQENT
+/* LAB 3 -- Added 120 entries due to 60 queues used by readylist mlfq */
 #define NQENT	(NPROC + 122 + NSEM + NSEM)
 #endif
 
