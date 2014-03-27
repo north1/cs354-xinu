@@ -6,6 +6,7 @@
 #define LOOP1	10
 #define LOOP2	10000000
 
+/* LAB 3 -- This function is designed to be CPU expensive and exceed it's quantum time */
 
 void cpuintensive() {
 	int32 i, j;
@@ -22,6 +23,6 @@ void cpuintensive() {
 
 		//using kprintf print the pid followed the outer loop count i,
 		//the process's priority and remaining time slice (preempt)
-		kprintf("CPU PID: %d -- i: %d -- Prio: %d -- Slice: %d\n", me, i, myEnt->prprio, preempt);
+		kprintf("CPU PID: %d -- i: %d -- Prio: %d -- totCPU: %d\n", me, i, myEnt->prprio, myEnt->prtotalcpu);
 	}
 }

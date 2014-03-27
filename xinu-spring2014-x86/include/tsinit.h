@@ -21,4 +21,4 @@ pid32 demlfq(qid16[]);
 /* LAB 3 -- testing prototypes */
 extern void cpuintensive();
 extern void iointensive();
-
+extern void hybridprocess();

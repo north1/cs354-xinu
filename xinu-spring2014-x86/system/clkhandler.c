@@ -14,7 +14,7 @@ interrupt clkhandler(void)
 	/* record clock ticks */
 
 	clkticks++;
-
+	clktimeaccru++;
 	/* update global counter for seconds */
 
 	if (clkticks == CLKTICKS_PER_SEC) {

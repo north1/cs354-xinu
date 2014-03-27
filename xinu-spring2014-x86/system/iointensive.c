@@ -6,6 +6,7 @@
 #define LOOP1	10
 #define LOOP2	1
 
+/* LAB 3 -- This process is intended to be iointensive and give up control frequently via sleepms() */
 
 void iointensive() {
 	int32 i, j;
@@ -19,6 +20,6 @@ void iointensive() {
 
 		//using kprintf print the pid followed the outer loop count i,
 		//the process's priority and remaining time slice (preempt)
-		kprintf("IO PID: %d -- i: %d -- Prio: %d -- Slice: %d\n", me, i, myEnt->prprio, preempt);
+		kprintf("IO PID: %d -- i: %d -- Prio: %d -- totCPU: %d\n", me, i, myEnt->prprio, myEnt->prtotalcpu);
 	}
 }

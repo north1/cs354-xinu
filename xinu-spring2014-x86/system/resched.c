@@ -56,7 +56,11 @@ void	resched(void)		/* assumes interrupts are disabled	*/
 	/* LAB 3 -- reset time slice for process -- previously set to QUANTUM */
 	preempt = tstab[ptnew->prprio].ts_quantum;
 	
-	ctxsw(&ptold->prstkptr, &ptnew->prstkptr);
+	/* LAB 3 -- reset clktimeold for the new process; update prtotalcpu for the old process */
+	ptnew->clktimeold = clktimeaccru;
+	ptold->prtotalcpu += clktimeaccru - ptold->clktimeold;
+	ctxsw(&ptold->prstkptr, &ptnew->prstkptr); 	//this appears to be the only place in the source where
+							//ctxsw is ever called. very convenient for lab 3.4
 
 	/* Old process returns here when resumed */
 

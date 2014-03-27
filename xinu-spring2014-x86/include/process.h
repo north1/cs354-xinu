@@ -57,6 +57,8 @@ struct procent {		/* entry in the process table		*/
 	umsg32	prmsg;		/* message sent to this process		*/
 	bool8	prhasmsg;	/* nonzero iff msg is valid		*/
 	int16	prdesc[NDESC];	/* device descriptors for process	*/
+	uint32	prtotalcpu;	/* LAB 3 -- total cpu time for the process */
+	uint32	clktimeold;	/* LAB 3 -- old value of clktimeaccu	*/
 };
 
 /* Marker for the top of a process stack (used to help detect overflow)	*/

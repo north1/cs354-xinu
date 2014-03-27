@@ -2,12 +2,18 @@
 
 #include <icu.s>
 		.text
+		
+
+
 count1000:	.word	1000
 		.globl	sltop
 		.globl	clkint
+
+
 clkint:
 		pushal
 		cli
+		incl	clktimeaccru	# LAB 3 -- Increment clktimeaccru
 		movb	$EOI,%al
 		outb	%al,$OCW1_2
 
