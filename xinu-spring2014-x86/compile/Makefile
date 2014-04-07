@@ -51,8 +51,7 @@ SRC_FILES =
 #------------------------------------------------------------------------
 
 SYSTEM_SFILES =								\
-	start.S		ctxsw.S		clkint.S	intr.S		\
-	host2netl_asm.S							\
+	start.S		ctxsw.S		clkint.S	intr.S
 
 SYSTEM_CFILES =								\
 	ascdate.c	bufinit.c	chprio.c	panic.c		\
@@ -69,10 +68,8 @@ SYSTEM_CFILES =								\
 	semcreate.c	semdelete.c	semreset.c	send.c		\
 	signal.c	signaln.c	sleep.c		suspend.c	\
 	unsleep.c	userret.c	wait.c		wakeup.c	\
-	write.c		xdone.c		yield.c		evec.c 		\
-	stacktrace.c	printsegaddress.c		myprogA.c	\
-	printprocstks.c	someprogA.c	printloop.c	mlfq.c		\
-	cpuintensive.c	iointensive.c	hybridprocess.c			\
+	write.c		xdone.c		yield.c		evec.c 	\
+	stacktrace.c
 
 SYSTEM_SFULL = ${SYSTEM_SFILES:%=../system/%}
 SYSTEM_CFULL = ${SYSTEM_CFILES:%=../system/%}
@@ -216,9 +213,6 @@ ${COMPS}:
 	$(MAKE) COMPS="$@" objects
 
 # Special rules for special files
-
-../system/host2netl_asm.o: ../system/host2netl_asm.S
-	${CPP} ${SDEFS} ../system/host2netl_asm.S | ${AS} -o ../system/host2netl_asm.o
 
 ../system/intr.o: ../system/intr.S
 	${CPP} ${SDEFS} ../system/intr.S | ${AS} -o ../system/intr.o

@@ -34,5 +34,3 @@ status	insert(
 	queuetab[curr].qprev = pid;
 	return OK;
 }
-
-

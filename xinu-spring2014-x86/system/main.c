@@ -3,9 +3,6 @@
 #include <xinu.h>
 #include <stdio.h>
 
-static unsigned long *esp;
-
-
 int main(int argc, char **argv)
 {
 	uint32 retval;
@@ -31,34 +28,9 @@ int main(int argc, char **argv)
 	}
 	*/
 
-	/* LAB 3 -- */
-	//kprintf("proctab[0].tqexp: %d", tstab[0].ts_tqexp);
-	//cpuintensive();
-	/*	
-	resume(create(cpuintensive, 1024, 20, "cpu0", 0));
-	resume(create(cpuintensive, 1024, 20, "cpu1", 0));
-	resume(create(cpuintensive, 1024, 20, "cpu2", 0));
-	resume(create(cpuintensive, 1024, 20, "cpu3", 0));
-	
-	resume(create(iointensive, 1024, 20, "io0", 0));
-	resume(create(iointensive, 1024, 20, "io1", 0));
-	resume(create(iointensive, 1024, 20, "io2", 0));
-	resume(create(iointensive, 1024, 20, "io3", 0));
-	
-	*/
 
-	resume(create(cpuintensive, 1024, 20, "cpu", 0));
-	resume(create(hybridprocess, 1024, 20, "hyb", 0));
-
-	//sleep(2);	
-	//kprintf("clktime: %d -- clktimeaccru: %d\n", clktime, clktimeaccru);
-	
-	//shell stuff
-	sleep(1);
+	//while (1);
 	resume(create(shell, 8192, 50, "shell", 1, CONSOLE));
-	sleep(1);
-
-
 
 	/* Wait for shell to exit and recreate it */
 	recvclr();

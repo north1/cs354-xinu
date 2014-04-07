@@ -11,9 +11,6 @@
 
 extern	uint32	clktime;	/* current time in secs since boot	*/
 
-/* LAB 3 -- accumlated clock time for processes */
-extern uint32 clktimeaccru;
-
 extern	qid16	sleepq;		/* queue for sleeping processes		*/
 extern	int32	slnonempty;	/* nonzero if sleepq is nonempty	*/
 extern	int32	*sltop;		/* ptr to key in first item on sleepq	*/
